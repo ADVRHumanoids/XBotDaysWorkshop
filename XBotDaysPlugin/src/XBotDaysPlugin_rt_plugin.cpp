@@ -40,7 +40,7 @@ bool XBotDaysPlugin::init_control_plugin(std::string path_to_config_file,
      * the current date/time is always appended to the provided filename,
      * so that logs do not overwrite each other. */
 
-    _logger = XBot::MatLogger::getLogger("/tmp/PholusPlugin_log");
+    _logger = XBot::MatLogger::getLogger("/tmp/XBotDaysPlugin_log");
 
     /* Intialize/preallocate all variables */
     _enable_gcomp = true;
@@ -117,7 +117,7 @@ void XBotDaysPlugin::control_loop(double time, double period)
     alpha = std::min(alpha, 1.0);
 
     /* Define the position reference */
-    _qref = alpha * (_q_final - _q0) + (1 - alpha) * _q0;
+    _qref = alpha * _q_final + (1 - alpha) * _q0;
 
     /* Compute gravity torque */
      _gcomp.setZero(_robot->getJointNum());
