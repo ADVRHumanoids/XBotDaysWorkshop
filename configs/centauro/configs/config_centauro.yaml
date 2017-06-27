@@ -1,8 +1,8 @@
 # CENTAURO config
 XBotInterface:
-  urdf_path: "external/PholusWorkshop/configs/centauro/urdf/centauro_upper_body_updated_inertia.urdf"
-  srdf_path: "external/PholusWorkshop/configs/centauro/srdf/centauro_upperbody.srdf"
-  joint_map_path: "external/PholusWorkshop/configs/centauro/joint_map/centauro_joint_map.yaml"
+  urdf_path: "external/XBotDaysWorkshop/configs/centauro/urdf/centauro_upper_body_updated_inertia.urdf"
+  srdf_path: "external/XBotDaysWorkshop/configs/centauro/srdf/centauro_upperbody.srdf"
+  joint_map_path: "external/XBotDaysWorkshop/configs/centauro/joint_map/centauro_joint_map.yaml"
 
 RobotInterface:
   framework_name: "ROS"
