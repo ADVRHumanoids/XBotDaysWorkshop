@@ -29,6 +29,8 @@ XBotRTPlugins:
   plugins: ["HomingExample", "XBotDaysPlugin"]
   io_plugins: []
 
+NRTPlugins:
+  plugins: []
 
 MasterCommunicationInterface:
   framework_name: "ROS"
