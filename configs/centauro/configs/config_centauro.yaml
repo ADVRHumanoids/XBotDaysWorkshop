@@ -26,8 +26,8 @@ RobotInterfaceXBotRT:
   subclass_factory_name: "robot_interface_xbot_rt"
 
 XBotRTPlugins:
-  plugins: ["HomingExample", "XBotDaysPlugin"]
-  io_plugins: []
+  plugins: ["HomingExample", "XBotDaysPlugin", "TutorialPlugin", "OpenSotIk", "IkRosSharedMemoryPublisher"]
+  io_plugins: ["IkRosIo"]
 
 
 MasterCommunicationInterface:
