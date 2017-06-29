@@ -71,7 +71,7 @@ void TutorialPlugin::on_start(double time)
     
     /* Set the robot in low impedence mode */
     _robot->setStiffness(_stiffness0 * 1);
-    _robot->setStiffness(_damping0 * 1);
+    _robot->setDamping(_damping0 * 1);
     
     /* write to robot */
     _robot->move();
@@ -102,105 +102,96 @@ void TutorialPlugin::control_loop(double time, double period)
      *         rosservice call /TutorialPlugin_cmd "cmd: 'MY_COMMAND_1'"
      * If any command was received, the code inside the if statement is then executed. */
 
-    Eigen::VectorXd current_motor_positions;
-    _robot->getMotorPosition(current_motor_positions);
-    _robot->setPositionReference(current_motor_positions);
-    _robot->move();
+    if(command.read(current_command)){
+
+        if(current_command.str() == "gcomp ON"){
+            _enable_gcomp = true;
+        }
+
+        if(current_command.str() == "gcomp OFF"){
+            _enable_gcomp = false;
+        }
+        
+        if(current_command.str() == "say hello"){
+	  _say_hello = true;
+	  _start_time = time;
+	}
+
+    }
+    
+    if (!_say_hello){
+      // Define action time
+      double action_time = 5.0;
       
-//       std::cout << "current: " << current_motor_positions << std::endl;
-//       std::cout << "_q0:     " << _q0 << std::endl;
-//     
-//     if(command.read(current_command)){
-// 
-//         if(current_command.str() == "gcomp ON"){
-//             _enable_gcomp = true;
-//         }
-// 
-//         if(current_command.str() == "gcomp OFF"){
-//             _enable_gcomp = false;
-//         }
-//         
-//         if(current_command.str() == "say hello"){
-// 	  _say_hello = true;
-// 	  _start_time = time;
-// 	}
-// 
-//     }
-//     
-//     if (!_say_hello){
-//       // Define action time
-//       double action_time = 5.0;
-//       
-//       // Define relative action status
-//       double rel_action_status = (time - _start_time) / action_time;
-//       double smooth_action_status = rel_action_status * rel_action_status * rel_action_status * (rel_action_status * (6 * rel_action_status-15) + 10);
-//       smooth_action_status = std::min(1.0, smooth_action_status);
-//       
-//       // Define current pose
-//       _q_tmp = _q0;
-// //       _q_tmp = _q0 + smooth_action_status * (_q_final - _q0);
-//       
-//       if (_enable_gcomp)
-// 	_robot->model().computeGravityCompensation(_gcomp);
-//       
-//       else
-// 	_gcomp.setZero(_robot->getJointNum());
-//       
-//       
-//       // send to robot
-//       _robot->setPositionReference(_q_tmp);
-//       _robot->setEffortReference(_gcomp);
-//       _robot->move();
-//     }
-//     else
-//     {
-//       // Define action time
-//       double action_time = 2.0;
-//       
-//       // Define relative action status
-//       double rel_action_status = (time - _start_time) / action_time;
-//       rel_action_status = std::min(7.0, rel_action_status);
-//       
-//       if (rel_action_status <= 1) {
-// 	// Define current pose
-// 	_q_tmp = _q_final + rel_action_status * (_q_wave1 - _q_final);
-//       }
-//       else if (rel_action_status <= 2) {
-// 	// Define current pose
-// 	_q_tmp = _q_wave1 + (rel_action_status - 1) * (_q_wave2 - _q_wave1);
-//       }
-//       else if (rel_action_status <= 3) {
-// 	// Define current pose
-// 	_q_tmp = _q_wave2 + (rel_action_status - 2) * (_q_wave1 - _q_wave2);
-//       }
-//       else if (rel_action_status <= 4) {
-// 	// Define current pose
-// 	_q_tmp = _q_wave1 + (rel_action_status - 3) * (_q_wave2 - _q_wave1);
-//       }
-//       else if (rel_action_status <= 5) {
-// 	// Define current pose
-// 	_q_tmp = _q_wave2 + (rel_action_status - 4) * (_q_wave1 - _q_wave2);
-//       }
-//       else if (rel_action_status <= 6) {
-// 	// Define current pose
-// 	_q_tmp = _q_wave1 + (rel_action_status - 5) * (_q_wave2 - _q_wave1);
-//       }
-//       else if (rel_action_status <= 7) {
-// 	// Define current pose
-// 	_q_tmp = _q_wave2 + (rel_action_status - 6) * (_q_final - _q_wave2);
-//       }
-//       
-//       if (rel_action_status > 7 - 1e-3)
-// 	_say_hello = false;
-//       
-//       _robot->model().computeGravityCompensation(_gcomp);
-//       
-//       // send to robot
-//       _robot->setPositionReference(_q_tmp);
-//       _robot->setEffortReference(_gcomp);
-//       _robot->move();
-//     }
-//     
+      // Define relative action status
+      double rel_action_status = (time - _start_time) / action_time;
+      double smooth_action_status = rel_action_status * rel_action_status * rel_action_status * (rel_action_status * (6 * rel_action_status-15) + 10);
+      smooth_action_status = std::min(1.0, smooth_action_status);
+      
+      // Define current pose
+      _q_tmp = _q0 + smooth_action_status * (_q_final - _q0);
+      
+      if (_enable_gcomp)
+	_robot->model().computeGravityCompensation(_gcomp);
+      
+      else
+	_gcomp.setZero(_robot->getJointNum());
+      
+      
+      // send to robot
+      _robot->setPositionReference(_q_tmp);
+      _robot->setEffortReference(_gcomp);
+      _robot->move();
+    }
+    else
+    {
+      // Define action time
+      double action_time = 2.0;
+      
+      // Define relative action status
+      double rel_action_status = (time - _start_time) / action_time;
+      rel_action_status = std::min(7.0, rel_action_status);
+      
+      if (rel_action_status <= 1) {
+	// Define current pose
+	_q_tmp = _q_final + rel_action_status * (_q_wave1 - _q_final);
+      }
+      else if (rel_action_status <= 2) {
+	// Define current pose
+	_q_tmp = _q_wave1 + (rel_action_status - 1) * (_q_wave2 - _q_wave1);
+      }
+      else if (rel_action_status <= 3) {
+	// Define current pose
+	_q_tmp = _q_wave2 + (rel_action_status - 2) * (_q_wave1 - _q_wave2);
+      }
+      else if (rel_action_status <= 4) {
+	// Define current pose
+	_q_tmp = _q_wave1 + (rel_action_status - 3) * (_q_wave2 - _q_wave1);
+      }
+      else if (rel_action_status <= 5) {
+	// Define current pose
+	_q_tmp = _q_wave2 + (rel_action_status - 4) * (_q_wave1 - _q_wave2);
+      }
+      else if (rel_action_status <= 6) {
+	// Define current pose
+	_q_tmp = _q_wave1 + (rel_action_status - 5) * (_q_wave2 - _q_wave1);
+      }
+      else if (rel_action_status <= 7) {
+	// Define current pose
+	_q_tmp = _q_wave2 + (rel_action_status - 6) * (_q_final - _q_wave2);
+      }
+      
+      if (rel_action_status > 7 - 1e-3)
+	_say_hello = false;
+      
+      _robot->model().computeGravityCompensation(_gcomp);
+      
+      // send to robot
+      _robot->setPositionReference(_q_tmp);
+      _robot->setEffortReference(_gcomp);
+      _robot->move();
+    }
+    
 
 }
 
