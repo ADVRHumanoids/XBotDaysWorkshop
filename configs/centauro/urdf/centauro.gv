@@ -1,0 +1,80 @@
+digraph G {
+node [shape=box];
+"world" [label="world"];
+"pelvis" [label="pelvis"];
+"hip1_1" [label="hip1_1"];
+"hip2_1" [label="hip2_1"];
+"knee_1" [label="knee_1"];
+"ankle1_1" [label="ankle1_1"];
+"ankle2_1" [label="ankle2_1"];
+"wheel_1" [label="wheel_1"];
+"hip1_2" [label="hip1_2"];
+"hip2_2" [label="hip2_2"];
+"knee_2" [label="knee_2"];
+"ankle1_2" [label="ankle1_2"];
+"ankle2_2" [label="ankle2_2"];
+"wheel_2" [label="wheel_2"];
+"hip1_3" [label="hip1_3"];
+"hip2_3" [label="hip2_3"];
+"knee_3" [label="knee_3"];
+"ankle1_3" [label="ankle1_3"];
+"ankle2_3" [label="ankle2_3"];
+"wheel_3" [label="wheel_3"];
+"hip1_4" [label="hip1_4"];
+"hip2_4" [label="hip2_4"];
+"knee_4" [label="knee_4"];
+"ankle1_4" [label="ankle1_4"];
+"ankle2_4" [label="ankle2_4"];
+"wheel_4" [label="wheel_4"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"world" -> "reference" [label="xyz: 0 0 0.759 \nrpy: 0 -0 0"]
+"reference" -> "pelvis"
+"pelvis" -> "hip_yaw_1" [label="xyz: 0.225 0.125 0.11 \nrpy: -3.14159 -0 0.507099"]
+"hip_yaw_1" -> "hip1_1"
+"hip1_1" -> "hip_pitch_1" [label="xyz: 0 0 0.059 \nrpy: 1.5708 -0 0.507099"]
+"hip_pitch_1" -> "hip2_1"
+"hip2_1" -> "knee_pitch_1" [label="xyz: 0 0.3 -0.0036 \nrpy: -3.14159 1.26218e-29 1.5708"]
+"knee_pitch_1" -> "knee_1"
+"knee_1" -> "ankle_pitch_1" [label="xyz: 0.2 0 -0.10015 \nrpy: -3.14159 -0 0"]
+"ankle_pitch_1" -> "ankle1_1"
+"ankle1_1" -> "ankle_yaw_1" [label="xyz: 0 0 0 \nrpy: 1.5708 -5.55112e-17 1.5708"]
+"ankle_yaw_1" -> "ankle2_1"
+"ankle2_1" -> "j_wheel_1" [label="xyz: 0 0.00085 0.235 \nrpy: 1.5708 -0 0"]
+"j_wheel_1" -> "wheel_1"
+"pelvis" -> "hip_yaw_2" [label="xyz: 0.225 -0.125 0.11 \nrpy: -3.14159 -0 -0.507099"]
+"hip_yaw_2" -> "hip1_2"
+"hip1_2" -> "hip_pitch_2" [label="xyz: 0 0 0.059 \nrpy: 1.5708 -0 2.63449"]
+"hip_pitch_2" -> "hip2_2"
+"hip2_2" -> "knee_pitch_2" [label="xyz: 0 0.3 -0.0036 \nrpy: -3.14159 1.26218e-29 1.5708"]
+"knee_pitch_2" -> "knee_2"
+"knee_2" -> "ankle_pitch_2" [label="xyz: 0.2 0 -0.10015 \nrpy: -3.14159 -0 0"]
+"ankle_pitch_2" -> "ankle1_2"
+"ankle1_2" -> "ankle_yaw_2" [label="xyz: 0 0 0 \nrpy: 1.5708 -5.55112e-17 1.5708"]
+"ankle_yaw_2" -> "ankle2_2"
+"ankle2_2" -> "j_wheel_2" [label="xyz: 0 0.00085 0.235 \nrpy: 1.5708 -0 0"]
+"j_wheel_2" -> "wheel_2"
+"pelvis" -> "hip_yaw_3" [label="xyz: -0.225 0.125 0.11 \nrpy: -3.14159 -0 2.63449"]
+"hip_yaw_3" -> "hip1_3"
+"hip1_3" -> "hip_pitch_3" [label="xyz: 0 0 0.059 \nrpy: 1.5708 -0 2.63449"]
+"hip_pitch_3" -> "hip2_3"
+"hip2_3" -> "knee_pitch_3" [label="xyz: 0 0.3 -0.0036 \nrpy: -3.14159 1.26218e-29 1.5708"]
+"knee_pitch_3" -> "knee_3"
+"knee_3" -> "ankle_pitch_3" [label="xyz: 0.2 0 -0.10015 \nrpy: -3.14159 -0 0"]
+"ankle_pitch_3" -> "ankle1_3"
+"ankle1_3" -> "ankle_yaw_3" [label="xyz: 0 0 0 \nrpy: 1.5708 -5.55112e-17 1.5708"]
+"ankle_yaw_3" -> "ankle2_3"
+"ankle2_3" -> "j_wheel_3" [label="xyz: 0 0.00085 0.235 \nrpy: 1.5708 -0 0"]
+"j_wheel_3" -> "wheel_3"
+"pelvis" -> "hip_yaw_4" [label="xyz: -0.225 -0.125 0.11 \nrpy: -3.14159 -0 -2.63449"]
+"hip_yaw_4" -> "hip1_4"
+"hip1_4" -> "hip_pitch_4" [label="xyz: 0 0 0.059 \nrpy: 1.5708 -0 0.507099"]
+"hip_pitch_4" -> "hip2_4"
+"hip2_4" -> "knee_pitch_4" [label="xyz: 0 0.3 -0.0036 \nrpy: -3.14159 1.26218e-29 1.5708"]
+"knee_pitch_4" -> "knee_4"
+"knee_4" -> "ankle_pitch_4" [label="xyz: 0.2 0 -0.10015 \nrpy: -3.14159 -0 0"]
+"ankle_pitch_4" -> "ankle1_4"
+"ankle1_4" -> "ankle_yaw_4" [label="xyz: 0 0 0 \nrpy: 1.5708 -5.55112e-17 1.5708"]
+"ankle_yaw_4" -> "ankle2_4"
+"ankle2_4" -> "j_wheel_4" [label="xyz: 0 0.00085 0.235 \nrpy: 1.5708 -0 0"]
+"j_wheel_4" -> "wheel_4"
+}

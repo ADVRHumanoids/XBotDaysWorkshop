@@ -1,15 +1,15 @@
 # CENTAURO config
 XBotInterface:
-  urdf_path: "external/PholusWorkshop/configs/centauro/urdf/centauro_full_wheels.urdf"
-  srdf_path: "external/PholusWorkshop/configs/centauro/srdf/centauro_full_wheels.srdf"
-  joint_map_path: "external/PholusWorkshop/configs/centauro/joint_map/centauro_joint_map.yaml"
+  urdf_path: "configs/ADVR_shared/centauro/urdf/centauro_upper_body_updated_inertia.urdf"
+  srdf_path: "configs/ADVR_shared/centauro/srdf/centauro_upperbody.srdf"
+  joint_map_path: "configs/ADVR_shared/centauro/joint_map/centauro_joint_map.yaml"
 
 RobotInterface:
   framework_name: "ROS"
 
 ModelInterface:
   model_type: "RBDL"
-  is_model_floating_base: "true"
+  is_model_floating_base: "false"
 
 RobotInterfaceROS:
   subclass_name: "RobotInterfaceROS"
@@ -18,7 +18,7 @@ RobotInterfaceROS:
   control_message_type: "AdvrCommandMessage"
   jointstate_message_type: "AdvrJointStateMessage"
   ft_topic_names: []
-  imu_topic_names: ["/xbotcore/centauro/imu/imu_link"]
+  imu_topic_names: []
 
 RobotInterfaceXBotRT:
   subclass_name: "RobotInterfaceXBotRT"
@@ -27,9 +27,26 @@ RobotInterfaceXBotRT:
 
 XBotRTPlugins:
   plugins: ["HomingExample"]
+  io_plugins: []
+
+NRTPlugins:
+  plugins: [] 
 
 MasterCommunicationInterface:
   framework_name: "ROS"
+
+CustomCmnd:
+  subclass_name: "CustomCmndMessage"
+  path_to_shared_lib: "libCustomCmndMessage.so"
+  subclass_factory_name: "customcmnd_control_message"
+  joint_service_name: "/centauro/position_controller/get_joint_names"
+  command_topic_name: "/centauro/position_controller/command"
+
+JointState:
+  subclass_name: "JointStateMessage"
+  path_to_shared_lib: "libJointStateMessage.so"
+  subclass_factory_name: "jointstate_jointstate_message"
+  joint_state_topic_name: "/centauro/joint_states"
 
 AdvrCommandMessage:
   subclass_name: "CommandAdvr"
@@ -67,24 +84,6 @@ GazeboXBotPlugin:
     j_arm2_4: {p: 5000, d: 30}
     j_arm2_6: {p: 2000, d: 5}
     torso_yaw: {p: 5000, d: 30}
-    hip_yaw_1: {p: 5000, d: 30}
-    hip_yaw_2: {p: 5000, d: 30}
-    hip_yaw_3: {p: 5000, d: 30}
-    hip_yaw_4: {p: 5000, d: 30}
-    hip_pitch_1: {p: 5000, d: 30}
-    hip_pitch_2: {p: 5000, d: 30}
-    hip_pitch_3: {p: 5000, d: 30}
-    hip_pitch_4: {p: 5000, d: 30}
-    knee_pitch_1: {p: 8000, d: 50}
-    knee_pitch_2: {p: 8000, d: 50}
-    knee_pitch_3: {p: 8000, d: 50}
-    knee_pitch_4: {p: 8000, d: 50}
-
-
-x_bot_core:
-  urdf_path: /home/embedded/robotology-superbuild/configs/ADVR_shared/centauro/urdf/centauro_bonn_review.urdf
-  srdf_path: /home/embedded/robotology-superbuild/configs/ADVR_shared/centauro/srdf/centauro_bonn_review.srdf
-  joint_map_config: /home/embedded/robotology-superbuild/configs/ADVR_shared/centauro/joint_map/centauro_bonn_review.yaml
 
 x_bot_ecat:
   name: XBotCore
@@ -169,7 +168,7 @@ CentAcESC_1:
   control_mode: pos_3b
   sign: 1
   pos_offset: 0
-  max_current_A: 10.0
+  max_current_A: 15.0
   pid :
     position:   [180.0 , 0.0 , 1.0]
     # pos_Kp pos_Kd tor_Kp tor_Kd tor_Ki

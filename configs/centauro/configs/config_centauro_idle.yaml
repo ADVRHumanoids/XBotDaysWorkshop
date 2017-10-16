@@ -27,7 +27,7 @@ RobotInterfaceROS:
   subclass_factory_name: "robot_interface_ros"
   control_message_type: "AdvrCommandMessage"
   jointstate_message_type: "AdvrJointStateMessage"
-  ft_topic_names: ["/xbotcore/centauro/ft/ft_arm1", "/xbotcore/centauro/ft/ft_arm2"]
+  ft_topic_names: ["/xbotcore/centauro/ft/ft_arm1"]
   imu_topic_names: ["/xbotcore/centauro/imu/imu_link"]
 
 RobotInterfaceXBotRT:
@@ -36,7 +36,8 @@ RobotInterfaceXBotRT:
   subclass_factory_name: "robot_interface_xbot_rt"
 
 XBotRTPlugins:
-  plugins: ["HomingExample"]
+  plugins: ["HomingExample", "AlexCommunication", "OpenSotIk"]
+  #plugins: ["HomingExample", "CirclePublisher", "OpenSotIk"]
   io_plugins: []
 
 NRTPlugins:

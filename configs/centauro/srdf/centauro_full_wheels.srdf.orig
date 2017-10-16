@@ -3,19 +3,19 @@
 
 
    <group name="front_left_leg">
-      <chain base_link="pelvis" tip_link="knee_1"/>
+      <chain base_link="pelvis" tip_link="wheel_1"/>
    </group>
 
    <group name="front_right_leg">
-      <chain base_link="pelvis" tip_link="knee_2"/>
+      <chain base_link="pelvis" tip_link="wheel_2"/>
    </group>
 
    <group name="rear_right_leg">
-      <chain base_link="pelvis" tip_link="knee_3"/>
+      <chain base_link="pelvis" tip_link="wheel_4"/>
    </group>
 
    <group name="rear_left_leg">
-      <chain base_link="pelvis" tip_link="knee_4"/>
+      <chain base_link="pelvis" tip_link="wheel_3"/>
    </group>
 
    <group name="left_arm">
@@ -40,15 +40,11 @@
     <group name="arms">
       <group name="left_arm"/>
       <group name="right_arm"/>
-   </group>
-
-
+    </group>
 
     <group name="force_torque_sensors">
-<!--        <joint name="ft_foot_1_joint"/>
-        <joint name="ft_foot_2_joint"/>
-        <joint name="ft_foot_3_joint"/>
-        <joint name="ft_foot_4_joint"/>-->
+<!--        <joint name="j_ft_arm1"/>
+        <joint name="j_ft_arm2"/>-->
     </group>
 
     <group name="imu_sensors">
@@ -90,21 +86,43 @@
         <joint name="j_arm2_6" value="0.8"/>
         <joint name="j_arm2_7" value="0.0"/>
 
-        <joint name="hip_yaw_1" value="0.8"/>
-        <joint name="hip_pitch_1" value="1.0"/>
-        <joint name="knee_pitch_1" value="-1.0"/>
+<<<<<<< Updated upstream
+        <joint name="hip_yaw_1" value="0.0"/>
+        <joint name="hip_pitch_1" value="0.0"/>
+        <joint name="knee_pitch_1" value="0.0"/>
 
-        <joint name="hip_yaw_2" value="0.8"/>
-        <joint name="hip_pitch_2" value="1.0"/>
-        <joint name="knee_pitch_2" value="-1.0"/>
+        <joint name="hip_yaw_2" value="0.0"/>
+        <joint name="hip_pitch_2" value="0.0"/>
+        <joint name="knee_pitch_2" value="0.0"/>
 
-        <joint name="hip_yaw_3" value="-0.8"/>
-        <joint name="hip_pitch_3" value="1.0"/>
-        <joint name="knee_pitch_3" value="-1.0"/>
+        <joint name="hip_yaw_3" value="0.0"/>
+        <joint name="hip_pitch_3" value="0.0"/>
+        <joint name="knee_pitch_3" value="0.0"/>
 
-        <joint name="hip_yaw_4" value="-0.8"/>
-        <joint name="hip_pitch_4" value="1.0"/>
-        <joint name="knee_pitch_4" value="-1.0"/>
+        <joint name="hip_yaw_4" value="0.0"/>
+        <joint name="hip_pitch_4" value="0.0"/>
+        <joint name="knee_pitch_4" value="0.0"/>
+=======
+        <joint name="hip_yaw_1" value="1.5"/>
+        <joint name="hip_pitch_1" value="0.5"/>
+        <joint name="knee_pitch_1" value="0.5"/>
+        <joint name="ankle_yaw_1" value="1.5"/>
+
+        <joint name="hip_yaw_2" value="-1.5"/>
+        <joint name="hip_pitch_2" value="-0.5"/>
+        <joint name="knee_pitch_2" value="-0.5"/>
+        <joint name="ankle_yaw_2" value="-1.5"/>
+
+        <joint name="hip_yaw_3" value="-1.5"/>
+        <joint name="hip_pitch_3" value="-0.5"/>
+        <joint name="knee_pitch_3" value="-0.5"/>
+        <joint name="ankle_yaw_3" value="-1.5"/>
+
+        <joint name="hip_yaw_4" value="1.5"/>
+        <joint name="hip_pitch_4" value="0.5"/>
+        <joint name="knee_pitch_4" value="0.5"/>
+        <joint name="ankle_yaw_4" value="1.5"/>
+>>>>>>> Stashed changes
 
     </group_state>
 
